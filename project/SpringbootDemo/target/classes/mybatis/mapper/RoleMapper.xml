@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sbs.system.role.mapper.RoleMapper">
+	<resultMap type="Role" id="RoleResult">
+		<id     property="roleId"       column="role_id"      />
+		<result property="code"    		column="code"    	  />
+		<result property="roleName"    	column="role_name"    />
+		<result property="roleKey"    	column="role_key"    />
+		<result property="orderNum"    	column="order_num"    />
+		<result property="status"    	column="status"    	  />
+		<result property="createBy"    	column="create_by"    />
+		<result property="createTime"   column="create_time"  />
+		<result property="updateBy"     column="update_by"    />
+		<result property="updateTime"   column="update_time"  />
+		<result property="remark"       column="remark" 	  />
+	</resultMap>
+	<!-- 
+		获得角色列表
+	 -->
+	<select id="findRoleList" resultMap="RoleResult">
+		select
+			r.role_id,
+			r.code,
+			r.role_name,
+			r.role_key,
+			r.order_num,
+			r.status,
+			r.create_by,
+			r.create_time,
+			r.update_by,
+			r.update_time,
+			r.remark
+		from
+			sys_role r
+			order by r.order_num
+	</select>
+	
+	<select id="findMenuByID" parameterType="int" resultMap="RoleResult">
+		select
+			r.role_id,
+			r.code,
+			r.role_name,
+			r.role_key,
+			r.order_num,
+			r.status,
+			r.create_by,
+			r.create_time,
+			r.update_by,
+			r.update_time,
+			r.remark
+		from
+			sys_role r
+		where
+			role_id = #{roleId}
+	</select>
+	
+	<delete id = "deleteMenuById" parameterType="int">
+		delete
+		from
+			sys_role
+		where 
+			role_id = #{roleId}
+	</delete>
+	
+	<delete id = "batchDeleteRole" parameterType="int">
+		delete
+		from
+			sys_role
+		where 
+			role_id in
+			<foreach collection="array" item="roleId" open="(" separator="," close=")">
+	 			#{roleId}
+	        </foreach> 
+	</delete>
+	
+	<update id="updateMenu" parameterType="Menu">
+ 		update sys_menu
+ 		<set>
+ 			<if	test="roleId != null and roleId = ''">		      role_id=#{roleId},</if>
+			<if	test="roleName != null and roleName != ''">       role_name=#{roleName},</if>
+			<if	test="roleKey != null and roleKey != ''">         role_key=#{roleKey},</if>
+			<if	test="orderNum != null and orderNum != ''">       orderNum=#{orderNum},</if>
+			<if	test="status != null and status != ''">    	      status=#{status},</if>
+			<if	test="createBy != null and createBy != ''">    	  create_by=#{createBy},</if>
+			<if	test="createTime != null and createTime != ''">   create_time=#{createTime},</if>
+			<if	test="updateBy != null and updateBy != ''">       update_by=#{updateBy},</if>
+			<if	test="updateTime != null and updateTime != ''">   update_time=#{updateTime},</if>
+			<if	test="remark != null and remark != ''">           remark=#{remark}</if>
+ 		</set>
+ 		where
+ 			1=1
+ 			<if test="roleId != null and roleId  != ''">and role_id = #{roleId}</if>
+	</update>
+	
+	<insert id="saveMenu" parameterType="Menu" useGeneratedKeys="true" keyProperty="roleId">
+ 		insert 
+ 		into 
+ 			sys_menu(
+ 			<if	test="roleId != null and roleId = ''">		      menu_id,</if>
+			<if	test="roleName != null and roleName != ''">       role_name,</if>
+			<if	test="roleKey != null and roleKey != ''">         role_key,</if>
+			<if	test="orderNum != null and orderNum != ''">       orderNum,</if>
+			<if	test="status != null and status != ''">    	      status,</if>
+			<if	test="createBy != null and createBy != ''">    	  create_by,</if>
+			create_time,
+			<if	test="updateBy != null and updateBy != ''">       update_by,</if>
+			<if	test="updateTime != null and updateTime != ''">   update_time,</if>
+			<if	test="remark != null and remark != ''">           remark</if>
+ 		)values(
+ 			<if	test="roleId != null and roleId = ''">		      #{roleId},</if>
+			<if	test="roleName != null and roleName != ''">       #{roleName},</if>
+			<if	test="roleKey != null and roleKey != ''">         #{roleKey},</if>
+			<if	test="orderNum != null and orderNum != ''">       #{orderNum},</if>
+			<if	test="status != null and status != ''">    	      #{status},</if>
+			<if	test="createBy != null and createBy != ''">    	  #{createBy},</if>
+			sysdate(),
+			<if	test="updateBy != null and updateBy != ''">       #{updateBy},</if>
+			<if	test="updateTime != null and updateTime != ''">   #{updateTime},</if>
+			<if	test="remark != null and remark != ''">           #{remark}</if>
+ 			
+ 		)
+	</insert>
+</mapper>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sbs.system.user.mapper.UserMapper">
+	<!-- sys_user表字段映射 -->
+	<resultMap type="User" id="UserResult">
+		<id     property="userId"       column="user_id"      />
+		<result property="code"    		column="code"   	  />
+		<result property="loginName"    column="login_name"   />
+		<result property="userName"     column="user_name"    />
+		<result property="email"        column="email"        />
+		<result property="phonenumber"  column="phonenumber"  />
+		<result property="sex"  		column="sex"		  />
+		<result property="headImgUrl"   column="head_img_url" />
+		<result property="password"     column="password"     />
+		<result property="salt"         column="salt"         />
+		<result property="status"       column="status"       />
+		<result property="loginIp"      column="login_ip"     />
+		<result property="loginDate"    column="login_date"   />
+		<result property="createBy"     column="create_by"    />
+		<result property="createTime"   column="create_time"  />
+		<result property="updateBy"     column="update_by"    />
+		<result property="updateTime"   column="update_time"  />
+		<result property="remark"       column="remark"  	  />
+	</resultMap>
+	<select id="findUserList" parameterType="User" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		
+	</select>
+	<!-- 根据邮箱地址查找用户 -->
+	<select id="findUserByEmail" parameterType="String" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		where
+			u.email = #{email}
+	</select>
+	<!-- 根据id查找用户 -->
+	<select id="findUserByID" parameterType="int" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		where
+			u.user_id = #{userId}
+	</select>	
+	<!-- 根据loginName查找用户 -->
+	<select id="findUserByLoginName" parameterType="String" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		where
+			u.login_name = #{loginName}
+	</select>	
+	<!-- 根据phonenumber查找用户 -->
+	<select id="findUserByPhoneNumber" parameterType="String" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		where
+			u.phonenumber = #{phonenumber}
+	</select>
+	<!-- 根据用户id删除用户 -->
+	<delete id="deleteUserById" parameterType="int">
+ 		delete
+ 		from
+ 			sys_user
+ 		where
+ 			id = #{id}
+ 	</delete>
+ 	
+	<delete id="batchDeleteUser" parameterType="int">
+ 		delete from
+ 			sys_user
+ 		where
+ 			user_id in
+	 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+	 			#{userId}
+	        </foreach> 
+ 	</delete>
+	
+	<update id="updateUser" parameterType="User">
+ 		update sys_user
+ 		<set>
+ 			<if test="code != null and code != ''">code = #{code},</if>
+ 			<if test="loginName != null and loginName != ''">login_name = #{loginName},</if>
+ 			<if test="userName != null and userName != ''">user_name = #{userName},</if>
+ 			<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber},</if>
+ 			<if test="sex != null and sex != ''">sex = #{sex},</if>
+ 			<if test="headImgUrl != null and headImgUrl != ''">head_img_url = #{headImgUrl},</if>
+  			<if test="password != null and password != ''">password = #{password},</if>
+  			<if test="salt != null and salt != ''">salt = #{salt},</if>
+ 	 		<if test="status !=null">status = #{status},</if>
+ 			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
+ 			<if test="loginDate != null">login_date = #{loginDate},</if>
+ 			<if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+ 			<if test="createTime != null">create_time = #{createTime},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+			update_time = sysdate()
+ 		</set>
+ 		where
+ 			1=1
+ 			<if test="userId != null and userId  != ''">and user_id = #{userId}</if>
+	</update>
+	
+	<insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+ 		insert into sys_user(
+ 			<if test="userId != null and userId != 0">user_id,</if>
+ 			<if test="code != null and code != ''">code,</if>
+ 			<if test="loginName != null and loginName != ''">login_name,</if>
+ 			<if test="userName != null and userName != ''">user_name,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
+ 			<if test="sex != null and sex != ''">sex,</if>
+ 			<if test="headImgUrl != null and headImgUrl != ''">head_img_url,</if>
+ 			<if test="password != null and password != ''">password,</if>
+ 			<if test="salt != null and salt != ''">salt,</if>
+ 			<if test="status !=null and status != ''">status,</if>
+ 			<if test="loginIp != null and loginIp != ''">login_ip,</if>
+ 			<if test="loginDate != null">login_date,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			create_time
+ 		)values(
+ 			<if test="userId != null and userId != ''">#{userId},</if>
+ 			<if test="code != null and code != ''">#{code},</if>
+ 			<if test="loginName != null and loginName != ''">#{loginName},</if>
+ 			<if test="userName != null and userName != ''">#{userName},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
+ 			<if test="sex != null and sex != ''">#{sex},</if>
+ 			<if test="headImgUrl != null and headImgUrl != ''">#{headImgUrl},</if>
+ 			<if test="password != null and password != ''">#{password},</if>
+ 			<if test="salt != null and salt != ''">#{salt},</if>
+ 			<if test="status !=null and status != ''">#{status},</if>
+ 			<if test="loginIp != null and loginIp != ''">#{loginIp},</if>
+ 			<if test="loginDate != null">login_date = #{loginDate},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			<if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			sysdate()
+ 		)
+	</insert>
+</mapper>
