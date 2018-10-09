@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sbs.system.music.mapper.SongMenuMapper">
+	<resultMap type="SongMenu" id="SongMenuResult">
+		<id     property="songMenuId"       column="song_menu_id"      />
+		<result property="songMenuName"    	column="song_menu_name"    />
+		<result property="songMenuDesc"    	column="song_menu_desc"    />
+		<result property="songMenuUrl"    	column="song_menu_url"     />
+		<result property="songMenuImgurl"   column="song_menu_imgurl"  />
+	</resultMap>
+	
+	<insert id="insertSongMenu" parameterType="SongMenu" useGeneratedKeys="true" keyProperty="songMenuId">
+ 		insert 
+ 		into 
+ 			sys_song_menu(
+ 			<if	test="songMenuId != null and songMenuId = ''">		      song_menu_id,</if>
+			<if	test="songMenuName != null and songMenuName != ''">       song_menu_name,</if>
+			<if	test="songMenuDesc != null and songMenuDesc != ''">   	  song_menu_desc,</if>
+			<if	test="songMenuUrl != null and songMenuUrl != ''">    	  song_menu_url,</if>
+			<if	test="songMenuImgurl != null and songMenuImgurl != ''">   song_menu_imgurl</if>
+			
+ 		)values(
+ 			<if	test="songMenuId != null and songMenuId = ''">		      #{songMenuId},</if>
+			<if	test="songMenuName != null and songMenuName != ''">       #{songMenuName},</if>
+			<if	test="songMenuDesc != null and songMenuDesc != ''">   	  #{songMenuDesc},</if>
+			<if	test="songMenuUrl != null and songMenuUrl != ''">         #{songMenuUrl},</if>
+			<if	test="songMenuImgurl != null and songMenuImgurl != ''">   #{songMenuImgurl}</if>
+ 		)
+	</insert>
+	
+	<update id="truncateSongMenu">
+        truncate table sys_song_menu;
+    </update>
+    
+    <select id = "findAllSongMenu" resultMap = "SongMenuResult">
+    	select
+    		s.song_menu_id,
+    		s.song_menu_name,
+    		s.song_menu_desc,
+    		s.song_menu_url,
+    		s.song_menu_imgurl
+    	from
+    		sys_song_menu s
+    </select>
+    
+      <select id = "findSongMenuByMenuId" resultMap = "SongMenuResult">
+    	select
+    		s.song_menu_id,
+    		s.song_menu_name,
+    		s.song_menu_desc,
+    		s.song_menu_url,
+    		s.song_menu_imgurl
+    	from
+    		sys_song_menu s
+    	<where>
+    		s.song_menu_id = #{songMenuId}
+    	</where>
+    </select>
+   
+</mapper>

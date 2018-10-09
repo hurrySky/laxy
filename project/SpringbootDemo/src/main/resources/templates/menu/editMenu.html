@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+
+<head th:include="include :: head"></head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<body class="white-bg">
+		<div class=" animated fadeInRight ibox-content">
+			<div class="row">
+				<form class = "form-horizontal" id="menuEdit" >
+					<input name = "operation" type="hidden" th:value="edit" >
+					<input name = "menuId" type="hidden" th:value="${menu.menuId}" >
+					<input name = "menuLevel" type="hidden" th:value="${menu.menuLevel}" >
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">父菜单：</label>
+							<div  class="col-lg-4 col-md-4 col-sm-4">
+								<input class="form-control" type= "hidden" id="parentId" name = "parentId" th:value="${menu.parentId}" >
+								<!--  <span style="line-height: 25px" th:text="${parentMenu.menuName}"></span>	-->
+								<input class="form-control" type= "text" name = "" onclick="selectMenu()" id="menuTree" readonly="true" th:value="${parentMenu.menuName}" >
+							</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">菜单名称：</label>
+							<div  class="col-lg-6 col-md-6 col-sm-6">
+								<input class="form-control" type= "text" id = "menuName" name = "menuName" th:value="${menu.menuName}">
+							</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">菜单类型：</label>
+							<div  class="col-lg-4 col-md-4 col-sm-4">
+								<div class="form-group radio i-checks menuType">
+										<label class="radio-box"> <input type="radio" name="menuType" value="M" th:checked="${menu.menuType == 'M' ? true:false}"/> 目录 </label>
+										<label class="radio-box"> <input type="radio" name="menuType" value="C" th:checked="${menu.menuType == 'C' ? true:false}"/> 菜单 </label>
+										<label class="radio-box"> <input type="radio" name="menuType" value="F" th:checked="${menu.menuType == 'F' ? true:false}"/> 按钮 </label>
+								</div>
+							</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">图标：</label>
+							<div class="col-sm-8 col-md-8 col-lg-8">
+								<input id="icon" name="icon" class="form-control" type="text" placeholder="选择图标" th:value="${menu.icon}">
+	                    		<div class="ms-parent" style="width: 100%;">
+		                        	<div class="icon-drop animated flipInX" style="display:none;max-height:200px;overflow-y:auto">
+		                           		<div data-th-include="menu/icon"></div>
+		                        	</div>
+	                   			</div>
+							</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: none;">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">路径：</label>
+							<div  class="col-lg-6 col-md-6 col-sm-6">
+								<input class="form-control" type= "text" id = "url" name = "url" value="">
+							</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: none;">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">权限标识：</label>
+							<div  class="col-lg-6 col-md-6 col-sm-6">
+								<input class="form-control" type= "text" id = "perms" name = "perms" value="">
+							</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+							<label class="col-sm-2 col-md-2 col-lg-2 control-label">是否可见：</label>
+							<div  class="col-lg-4 col-md-4 col-sm-4">
+								<div class="form-group radio i-checks visible">
+										<label class="radio-box"> <input type="radio" name="visible" value="1" th:checked="${menu.visible == 1 ? true:false}"/> 显示 </label>
+										<label class="radio-box"> <input type="radio" name="visible" value="0" th:checked="${menu.visible == 0 ? true:false}"/> 隐藏 </label>
+								</div>
+							</div>
+					</div>
+					
+					<div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    	<label class="col-sm-2 col-md-2 col-lg-2 control-label">描述：</label>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                        	<textarea id="remark" name="remark" class="form-control" th:text="${menu.remark}"></textarea>
+                        </div>
+                    </div>
+
+					<div class="form-control-static col-lg-4 col-md-4 col-sm-4 col-sm-offset-8 col-md-offset-8 col-lg-offset-8" >
+						<div class="form-control-static">
+							<button type="submit" class="btn btn-primary">提&nbsp;&nbsp;交</button>
+							<button th:onclick="'javascript:layer_close()'" class="btn btn-danger" type="button">关&nbsp;&nbsp;闭</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div th:include="include :: foot"></div>
+		<div th:include="include :: foot_form"></div>
+		<script src="/project/js/menu/editMenu.js"></script>
+	</body>
+</html>

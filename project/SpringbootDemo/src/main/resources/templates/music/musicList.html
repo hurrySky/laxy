@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head th:include="include :: head"></head>
+<style>
+.todo-list.small-list>li:hover {
+ background-color: #A2B5CD;
+}
+</style>
+<body class="gray-bg">
+	<div class="col-sm-12 animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="col-sm-12 ibox">
+					<br>
+					<div class="col-sm-3 animated flipInX">
+						<img class="img-responsive" th:src=${songMenu.songMenuImgurl}>
+						
+					</div>
+					<div class="col-sm-6">
+						<h2 th:text=${songMenu.songMenuName}></h2>
+					</div>
+					<div class="col-sm-3">
+						<div class="col-sm-10 col-sm-offset-2">
+							<hr>
+                       		<a href="/system/music/toMusicMenu">
+                       			<button class="btn btn-primary btn-circle btn-lg" type="button"><i class="fa fa-list"></i>
+                    			</button>
+                    			<button class="btn btn-danger btn-circle btn-lg" type="button"><i class="fa fa-music"></i>
+                    			</button>
+                    		</a>
+                    	</div>
+					</div>
+					
+				</div>
+				<div class="col-sm-7 animated fadeIn">
+					<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<ul class="todo-list  small-list" id = "songMenu">
+								<li th:each="song:${list}">
+									 <input class="songId" type="hidden" th:value="${song.songId}" value="">
+									 <a href="javascript:void(0)"><span onclick="clickToPlay(this)" th:text="${song.songName} + '&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;' + ${song.songAuthor}" class="m-l-xs"></span></a>
+									 <button onclick="addOrRemovePlayLists(this)" style="float: right;" class="btn btn-info btn-xs " type="button"><i class="fa fa-indent"></i></button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-5 animated flipInX my_song_menu">
+					<div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <h2>我的歌单</h2>
+                        <ul class="todo-list m-t small-list" id = "playLists">
+                           <li th:each="song:${list2}">
+                           		<input type="hidden" th:value="${song.songId}" value="">
+                         		<span th:text="${song.songName}"></span>  
+                         		<a style="float:right;" class="btn btn-danger btn-xs btn-rounded btn-outline" onclick="removeLi(this);" href="JavaScript:void(0);">去除</a>
+                           </li>
+                        </ul>
+                    </div>
+                </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: foot"></div>
+	<script src="/music/zplayer.min.js"></script>
+<!--  	<script type="text/javascript" src="/music/music.js"></script> -->
+	<script type="text/javascript" src="/music/musicList.js"></script>
+	
+</body>
+</html>
