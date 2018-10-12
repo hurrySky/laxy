@@ -180,7 +180,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<set>
  			<if	test="menuId != null and menuid = ''">		      menu_id=#{menuId},</if>
 			<if	test="menuName != null and menuName != ''">       menu_name=#{menuName},</if>
-			<if	test="parentId != null and parentId != ''">       parent_id=#{parentId},</if>
+			<if	test="parentId != null">        parent_id=#{parentId},</if>
 			<if	test="menuLevel != null and menuLevel != ''">       menu_level=#{menuLevel},</if>
 			<if	test="orderNum != null and orderNum != ''">       orderNum=#{orderNum},</if>
 			<if	test="url != null and url != ''">    		      url=#{url},</if>
