@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.base.web.controller.BaseController;
 import com.sbs.base.web.pagination.TableDataInfo;
-import com.sbs.common.ModuleEnum;
+import com.sbs.common.enumeration.ModuleEnum;
 import com.sbs.common.tools.CodeCreateUtil;
 import com.sbs.system.user.entity.User;
 import com.sbs.system.user.service.UserService;

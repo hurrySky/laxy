@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.sbs.base.web.entity.BaseEntity;
 import com.sbs.base.web.pagination.PaginationDomain;
 import com.sbs.base.web.pagination.TableDataInfo;
-import com.sbs.common.ModuleEnum;
+import com.sbs.common.enumeration.ModuleEnum;
 import com.sbs.common.tools.PaingationParamBuildUtil;
 import com.sbs.common.tools.SearchParamBuildUtil;
 import com.sbs.common.tools.ServletRequestUtil;
