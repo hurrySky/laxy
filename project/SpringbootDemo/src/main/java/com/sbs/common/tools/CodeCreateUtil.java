@@ -3,7 +3,7 @@ package com.sbs.common.tools;
 import java.util.Calendar;
 import java.util.Random;
 
-import com.sbs.common.ModuleEnum;
+import com.sbs.common.enumeration.ModuleEnum;
 
 public class CodeCreateUtil {
 
