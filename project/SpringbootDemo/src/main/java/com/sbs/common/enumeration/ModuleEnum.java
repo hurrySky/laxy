@@ -1,4 +1,4 @@
-package com.sbs.common;
+package com.sbs.common.enumeration;
 
 public enum ModuleEnum {
 	USER,
