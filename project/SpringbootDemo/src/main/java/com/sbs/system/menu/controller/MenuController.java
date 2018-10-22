@@ -63,6 +63,8 @@ public class MenuController extends BaseController{
 	@RequestMapping(value = {"/add/{menuId}", "/add"}, method = RequestMethod.GET)
 	public String toMenuAdd(@PathVariable(required = false) Integer menuId,Model model) {
 		Menu menu = new Menu();
+		// 若menuId 为null，则在根目录下添加菜单
+		// 若menuId 不为null，则在menuid菜单下添加子菜单
 		if (StringUtil.isNotNull(menuId)) {
 			menu = menuService.findMenuByMenuId(menuId);
 		} else {

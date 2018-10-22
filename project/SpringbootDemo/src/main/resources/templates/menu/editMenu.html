@@ -8,13 +8,13 @@
 		<div class=" animated fadeInRight ibox-content">
 			<div class="row">
 				<form class = "form-horizontal" id="menuEdit" >
-					<input name = "operation" type="hidden" th:value="edit" >
-					<input name = "menuId" type="hidden" th:value="${menu.menuId}" >
-					<input name = "menuLevel" type="hidden" th:value="${menu.menuLevel}" >
+					<input name = "operation" type="text" th:value="edit" >
+					<input name = "menuId" type="text" th:value="${menu.menuId}" >
+					<input name = "menuLevel" type="text" th:value="${menu.menuLevel}" >
 					<div class="col-lg-12 col-md-12 col-sm-12 form-group">
 							<label class="col-sm-2 col-md-2 col-lg-2 control-label">父菜单：</label>
 							<div  class="col-lg-4 col-md-4 col-sm-4">
-								<input class="form-control" type= "hidden" id="parentId" name = "parentId" th:value="${menu.parentId}" >
+								<input class="form-control" type= "text" id="parentId" name = "parentId" th:value="${menu.parentId}" >
 								<!--  <span style="line-height: 25px" th:text="${parentMenu.menuName}"></span>	-->
 								<input class="form-control" type= "text" name = "" onclick="selectMenu()" id="menuTree" readonly="true" th:value="${parentMenu.menuName}" >
 							</div>
