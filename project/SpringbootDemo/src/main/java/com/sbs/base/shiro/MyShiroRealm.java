@@ -17,11 +17,12 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-
 import com.sbs.common.exception.user.UserNotExistsException;
 import com.sbs.common.exception.user.UserPasswordNotMatchException;
 import com.sbs.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.sbs.system.login.service.LoginService;
+import com.sbs.system.menu.service.MenuService;
+import com.sbs.system.role.service.RoleService;
 import com.sbs.system.user.entity.User;
 import com.sbs.system.user.service.UserService;
 
@@ -32,6 +33,12 @@ public class MyShiroRealm extends AuthorizingRealm{
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+    private MenuService menuService;
+
+    @Autowired
+    private RoleService roleService;
 	/**
 	 * 授权
 	 */
