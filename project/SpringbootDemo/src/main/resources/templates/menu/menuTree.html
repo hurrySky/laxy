@@ -71,6 +71,11 @@
     
     function changeParentmenu(event, treeId, treeNode) {
     	//alert($(parent.document).find("input[name='operation']").val());
+    	var menuId = $(parent.document).find("input[name='menuId']").val();
+    	if(menuId == treeNode.id) {
+    		alert("父菜单不能选择自己哦！");
+    		return;
+    	}
     	if('edit' == $(parent.document).find("input[name='operation']").val()) {
     		var menuLevel = treeNode.menuLevel + 1;
     		$(parent.document).find("input[name='menuLevel']").val(menuLevel);

@@ -4,6 +4,14 @@ $(document).ready(function() {
 	initOperation();
 });
 
+/**
+ * 表格元素血染完成后，调用调整 表格内容样式的方法
+ */
+$('#userList').on( 'draw.dt', function () {
+	// 初始化表格：若需要表格内容居中，只需要给 表头 th 添加类 content_center
+	$.initTdStyle("userList");
+});
+
 function queryUserList() {
 	
 	$("#userList").dataTable({
@@ -131,7 +139,10 @@ function queryUserList() {
 		},{
 			"data" : 'createBy'
 		},{
-			"data" : 'createTime'
+			"data" : 'createTime',
+			"render": function(data, type, row) {
+				return row.createTime.split(":")[0] + ":" + row.createTime.split(":")[1];
+			}
 		},{
 			"data" : 'updateBy',
 			"visible": false,

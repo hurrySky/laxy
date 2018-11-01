@@ -4,6 +4,11 @@ $(document).ready(function() {
 	initOperation();
 });
 
+$('#roleList').on( 'draw.dt', function () {
+	// 初始化表格：若需要表格内容居中，只需要给 表头 th 添加类 content_center
+	$.initTdStyle("roleList");
+});
+
 function queryRoleList() {
 	
 	$("#roleList").dataTable({
@@ -86,7 +91,10 @@ function queryRoleList() {
 		},{
 			"data" : 'createBy'
 		},{
-			"data" : 'createTime'
+			"data" : 'createTime',
+			"render": function(data, type, row) {
+				return row.createTime.split(":")[0] + ":" + row.createTime.split(":")[1];
+			}
 		},{
 			"data" : 'updateBy',
 			"visible": false
