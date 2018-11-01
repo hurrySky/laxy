@@ -1,9 +1,19 @@
 
-//var oTable;
 $(document).ready(function() {
 	queryMenuList();
 });
 
+/**
+ * 表格元素渲染完成后，调用调整 表格内容样式的方法
+ */
+$('#menuList').on( 'draw.dt', function () {
+	// 初始化表格：若需要表格内容居中，只需要给 表头 th 添加类 content_center
+	$.initTdStyle("menuList");
+});
+
+/**
+ * 初始化dataTable 控件,查询数据
+ */
 function queryMenuList() {
 
 	$("#menuList").dataTable({
@@ -114,7 +124,10 @@ function queryMenuList() {
 			"orderable": false
 		},{
 			"data" : 'createTime',
-			"orderable": false
+			"orderable": false,
+			"render": function(data, type, row) {
+				return row.createTime.split(":")[0] + ":" + row.createTime.split(":")[1];
+			}
 		},{
 			"data" : 'updateBy',
 			"visible": false,
@@ -140,6 +153,8 @@ function queryMenuList() {
 					return "三级";
 				}else if (data == 4) {
 					return "四级";
+				} else{
+					return "五级";
 				}
 			}
 		},{
@@ -179,7 +194,7 @@ function deleteMenu(menuId) {
 	layer.confirm('您确定要删除该菜单吗？', {
 		btn: ['删了吧','算了'] //按钮
 	}, function(){
-	 	layer.msg('正在加载中。。。', {icon: 1});
+	 	layer.msg('正在加载中...', {icon: 1});
 	 	var url = '/system/menu/delete';
 		$.ajax({
 			type : "POST",
@@ -210,7 +225,6 @@ function getSonMenu(menuId) {
 		for (var i = 0; i < menuIds.length; i++) {
 			i == 0 ? (result = result + menuIds[i]) : (result = result + ',' + menuIds[i]);
 		}
-		//alert(result);
 	}
 	$("#menuIds").val(result);
 
@@ -221,7 +235,6 @@ function getSonMenu(menuId) {
 
 function addOrRemoveMenuid(menuId) {
 	var index = $.inArray(menuId, menuIds);
-//	alert(index);
 	if (index == -1) {
 		menuIds.push(menuId);
 	} else {
