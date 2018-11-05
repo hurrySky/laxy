@@ -24,8 +24,8 @@ hs_err_pid*
 
 # target files
 project/SpringbootDemo/target
-project/SpringbootDemo/.settings
-project/SpringbootDemo/.classpath
-project/SpringbootDemo/.project
+*.settings
+*.classpath
+*.project
 
 
