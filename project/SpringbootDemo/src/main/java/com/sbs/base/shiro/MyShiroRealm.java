@@ -46,6 +46,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		System.out.println("hhhh");
+		System.out.println("hhhh");
 		return null;
 	}
 	
