@@ -11,9 +11,14 @@ public class CodeCreateUtil {
 		System.out.println(createCode("USER"));
 	}
 
+	/**
+	 * 编码生成
+	 * @param module
+	 * @return
+	 */
 	public static String createCode(String module) {
 		String code = "";
-		Calendar time=Calendar.getInstance(); 
+		Calendar time = Calendar.getInstance(); 
 		String month = ((time.get(Calendar.MONTH) + 1)+"").length() > 1 ? ((time.get(Calendar.MONTH) + 1) + ""):("0" +(time.get(Calendar.MONTH) + 1));
 		String day = (time.get(Calendar.DATE)+"").length() > 1 ? (time.get(Calendar.DATE)+"") : ("0" + time.get(Calendar.DATE));
 		String minit = (time.get(Calendar.MINUTE)+"").length() > 1 ? (time.get(Calendar.MINUTE)+"") : ("0" + time.get(Calendar.MINUTE));
