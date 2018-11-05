@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbs.common.tools.SaltCreaterUtil;
 import com.sbs.common.tools.StringUtil;
+import com.sbs.system.login.service.PasswordService;
 import com.sbs.system.user.entity.User;
 import com.sbs.system.user.mapper.UserMapper;
 @Service("userservice")
@@ -14,6 +16,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private PasswordService passwordService;
+	
 	@Override
 	public User findUserByUserId(Integer userId) {
 		
@@ -65,6 +70,9 @@ public class UserServiceImpl implements UserService{
 			if (StringUtil.isNotNull(user.getUserId())) {
 				count = userMapper.updateUser(user);
 			}else {
+				String salt = SaltCreaterUtil.createSalt();
+				user.setSalt(salt);
+				user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), salt));
 				count = userMapper.saveUser(user);
 			}
 		}

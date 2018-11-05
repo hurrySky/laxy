@@ -36,7 +36,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
     @ResponseBody
-    public String ajaxLogin(String username, String password) {
+    public String Login(String username, String password) {
 		
 //		ShiroHttpServletRequest httpServletRequest = (ShiroHttpServletRequest) ServletRequestUtil.getRequestAttributes().getRequest();
 //		Object object=	httpServletRequest.getParameter("username");

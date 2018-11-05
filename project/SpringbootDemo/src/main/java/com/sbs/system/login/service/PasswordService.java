@@ -69,7 +69,11 @@ public class PasswordService {
 	 * @param salt
 	 * @return
 	 */
-	 public String encryptPassword(String username, String password, String salt) {
-		 return new Md5Hash(username + password + salt).toHex().toString();
+	 public static String encryptPassword(String loginName, String password, String salt) {
+		 String encryPassword = new Md5Hash(loginName + password + salt).toHex().toString();
+		 return encryPassword;
+	 }
+	 public static void main(String [] args){
+		 System.out.println(encryptPassword("luoji", "luoji", "wecfg"));
 	 }
 }
