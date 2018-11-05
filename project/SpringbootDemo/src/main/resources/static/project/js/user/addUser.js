@@ -49,6 +49,7 @@ function addUser() {
 		data : {
 			"code": code,
 			"loginName": loginName,
+			"password": password,
 			"userName": userName,
 			"email": email,
 			"phonenumber": phonenumber,

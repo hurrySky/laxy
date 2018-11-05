@@ -47,6 +47,7 @@ function editUser() {
 			"userId": userId,
 			"code": code,
 			"loginName": loginName,
+			"password": password,
 			"userName": userName,
 			"email": email,
 			"phonenumber": phonenumber,
