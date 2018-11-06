@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.system.menu.entity.Menu;
+import com.sbs.system.user.entity.User;
 
 public interface MenuService {
 	/**
      * 查询导航栏菜单树集合对象，其中每个菜单项都是visible 为可见的
      * 
+     * @param user 用户实体
      * @return 完整的可见菜单树
      */
-    public List<Menu> findVisibleMenuList();
+    public List<Menu> findVisibleMenuList(User user);
 	
     /**
      * 查询菜单树集合对象，每个菜单项visible 既可以是为可见的也可以是不可见的

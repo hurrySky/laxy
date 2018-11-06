@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 
 		获得visible为显示的一级菜单
 	 -->
-	<select id="findVisibleFirstMenuList" resultMap="MenuResult">
+	<select id="findVisibleFirstMenuList" resultMap="MenuResult" parameterType="int">
 		select
 			m.menu_id,    
 			m.menu_name,  
@@ -68,8 +68,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			m.remark
 		from
 			sys_menu m
+			left join sys_role_menu a on m.menu_id = a.menu_id
+			left join sys_role b on b.role_id = a.role_id
+			left join sys_user_role c on c.role_id = b.role_id
+			left join sys_user d on d.user_id = c.user_id
 			where m.parent_id = 0
 			and m.visible = 1
+			and d.user_id = #{userId}
 			order by m.order_num
 	</select>
 	
@@ -102,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 
 		根据menuId获得某菜单的visible显示的子菜单
 	 -->
-	<select id="findVisibleSonMenuByMenuId" parameterType="int" resultMap="MenuResult">
+	<select id="findVisibleSonMenuByMenuId" parameterType="Map" resultMap="MenuResult">
 		select
 			m.menu_id,    
 			m.menu_name,  
@@ -121,8 +126,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			m.remark
 		from
 			sys_menu m
-				where m.parent_id = #{menuId}
+			left join sys_role_menu a on m.menu_id = a.menu_id
+			left join sys_role b on b.role_id = a.role_id
+			left join sys_user_role c on c.role_id = b.role_id
+			left join sys_user d on d.user_id = c.user_id
+				where m.parent_id = #{0}
 				and m.visible = 1
+				and d.user_id = #{1}
 			order by order_num
 	</select>
 	

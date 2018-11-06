@@ -64,7 +64,7 @@ public class LoginController {
 	public String  toindex(Model model) {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		model.addAttribute("user", user);
-		List<Menu> list = menuService.findVisibleMenuList();
+		List<Menu> list = menuService.findVisibleMenuList(user);
 		model.addAttribute("menus", list);
 		System.out.println(JSONArray.toJSONString(list));
 		return "index";

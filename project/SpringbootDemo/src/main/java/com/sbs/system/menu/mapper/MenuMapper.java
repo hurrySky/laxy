@@ -17,10 +17,10 @@ public interface MenuMapper {
     /**
      * 获得visible 为显示的一级菜单
      * 
-     * @param
+     * @param userId 用户userId
      * @return 一级菜单集合
      */
-    public List<Menu> findVisibleFirstMenuList();
+    public List<Menu> findVisibleFirstMenuList(int userId);
     
 	/**
 	 * 根据菜单id(menuId)查找菜单
@@ -41,7 +41,7 @@ public interface MenuMapper {
 	 * @param id
 	 * @return
 	 */
-	public List<Menu> findVisibleSonMenuByMenuId(int menuId);
+	public List<Menu> findVisibleSonMenuByMenuId(int menuId, int userId);
     /**
      * 通过菜单ID删除菜单
      * 

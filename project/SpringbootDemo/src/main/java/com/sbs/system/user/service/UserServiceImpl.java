@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService{
 		return 0;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public int saveUser(User user) {
 		int count = -99;

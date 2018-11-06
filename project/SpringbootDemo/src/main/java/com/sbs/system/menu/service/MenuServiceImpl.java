@@ -12,9 +12,11 @@ import org.thymeleaf.util.ArrayUtils;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sbs.common.tools.ShiroUtils;
 import com.sbs.common.tools.StringUtil;
 import com.sbs.system.menu.entity.Menu;
 import com.sbs.system.menu.mapper.MenuMapper;
+import com.sbs.system.user.entity.User;
 
 @Service("menuService")
 public class MenuServiceImpl implements MenuService, Cloneable{
@@ -25,9 +27,9 @@ public class MenuServiceImpl implements MenuService, Cloneable{
 	private Map<String, Object> resMap = new HashMap<String, Object>();
 	
 	@Override
-	public List<Menu> findVisibleMenuList() {
+	public List<Menu> findVisibleMenuList(User user) {
 		// 获得Visible 显示的一级菜单集合
-		List<Menu> list = menuMapper.findVisibleFirstMenuList();
+		List<Menu> list = menuMapper.findVisibleFirstMenuList(user.getUserId());
 		// 通过一级菜单遍历查询出子菜单集合，得道的list为完整的菜单树
 		list = getMenuList(list, true);
 		return list;
@@ -95,17 +97,20 @@ public class MenuServiceImpl implements MenuService, Cloneable{
 	}
 
 	/**
-	 * 递归获得子菜单
+	 * 通过父级菜单集合参数，是否查询可见菜单，查询获得该集合下的子菜单及父菜单的集合
+	 * 递归查询
 	 * 
-	 * @param : lists:父级菜单集合, isVisible:是否为可见菜单
-	 * @return： 菜单树集合
+	 * @param lists:父级菜单集合
+	 * @param isVisible:是否可见菜单
+	 * @return： 该父菜单集合的菜单及子菜单的集合
 	 */
 	private List<Menu> getMenuList(List<Menu> lists, Boolean onlyVisible) {
 		if (lists != null) {
 			for (Menu menu : lists) {
 				List<Menu> list = null;
 				if (onlyVisible) {
-					list = menuMapper.findVisibleSonMenuByMenuId(menu.getMenuId());
+					User user = ShiroUtils.getUser();
+					list = menuMapper.findVisibleSonMenuByMenuId(menu.getMenuId(),user.getUserId());
 				}else {
 					list = menuMapper.findSonMenuByMenuId(menu.getMenuId());
 				}
